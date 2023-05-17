@@ -8,21 +8,36 @@ use Validator;
 
 class ArticleController extends Controller
 {
-    function show(){
-       return view('list');
-    }
+    // function show(){
+    //    return view('list');
+    // }
     // public function index()
     // {
     //     $items = ['item1', 'item2', 'item3'];
 
     //     return view('list', ['items' => $items]);
     // }
-    public function index()
-    {
-        $articles = Article::all();
-        return view('list', compact('articles'));
-    }
+    // public function index()
+    // {
+    //     $articles = Article::all();
+    //     return view('list', compact('articles'));
+    // }
+
+//     public function index()
+// {
+//     $articles = Article::orderBy('created_at', 'asc')->get();
+//     return view('list', compact('articles'));
+// }
     
+public function index()
+{
+    $articles = Article::all();
+    $articles->map(function ($article, $key) {
+        $article->id = $key + 1;
+        return $article;
+    });
+    return view('list', compact('articles'));
+}
 
     public function addArticle(){
         return view('add');
