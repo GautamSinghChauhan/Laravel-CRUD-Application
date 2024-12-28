@@ -29,15 +29,15 @@ class ArticleController extends Controller
 //     return view('list', compact('articles'));
 // }
     
-public function index()
-{
-    $articles = Article::all();
-    $articles->map(function ($article, $key) {
-        $article->id = $key + 1;
-        return $article;
-    });
-    return view('list', compact('articles'));
-}
+// public function index()
+// {
+//     $articles = Article::all();
+//     $articles->map(function ($article, $key) {
+//         $article->id = $key + 1;
+//         return $article;
+//     });
+//     return view('list', compact('articles'));
+// }
 
     public function addArticle(){
         return view('add');
@@ -128,6 +128,8 @@ public function index()
 public function editArticle($id)
 {
     $article = Article::find($id);
+
+    // dd($article);
 
     if (!$article) {
         return redirect()->back()->with('error', 'Article not found.');

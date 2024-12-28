@@ -12,6 +12,9 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+        $this->app->singleton('customhelper', function () {
+            return new CustomHelper();
+        });
     }
 
     /**
